@@ -1,0 +1,68 @@
+@import "../../styles/colors";
+
+@mixin shared-main {
+    padding: 1vw 0 0 2vw;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 350px;
+        gap: 1.5vw;
+
+        input, button {
+            color: $secondary-color;
+            background-color: $primary-color;
+            outline: none;
+            border: 2px solid $secondary-color;
+            padding: .5vw 0 .5vw .5vw;
+            font-size: 16pt;
+
+            transition: border-color .1s linear;
+
+            &::placeholder {
+                transition: color .1s linear;
+            }
+
+            &:focus::placeholder {
+                color: transparent;
+            }
+        }
+
+        input {
+            &:focus {
+                border-color: $accent-color;
+            }
+        }
+
+        button {
+            &:hover {
+                cursor: pointer;
+                border-color: $accent-color;
+            }
+        }
+
+
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover,
+        textarea:-webkit-autofill:focus,
+        select:-webkit-autofill,
+        select:-webkit-autofill:hover,
+        select:-webkit-autofill:focus {
+            border: 2px solid $secondary-color;
+            -webkit-text-fill-color: $secondary-color;
+            -webkit-box-shadow: 0 0 0 1000px $primary-color inset;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    }
+}
+
+.loginMain {
+    @include shared-main;
+
+    .error {
+        color: $error-color;
+    }
+}
