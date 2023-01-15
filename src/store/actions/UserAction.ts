@@ -1,6 +1,6 @@
 import { Action } from "redux";
 import { AuthorizedUser, User } from "../../models/user";
-import { AuthResponse } from "../../models/response/AuthResponse";
+import { AuthResponse } from "../../models/auth/AuthResponse";
 import { TokenType } from "../types";
 
 export interface UserAction extends Action {

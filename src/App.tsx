@@ -1,18 +1,14 @@
-import React, { lazy, Suspense, useEffect } from 'react';
-import { Route, Routes, useNavigate } from "react-router-dom";
-import { $api, $cleanApi } from "./http";
+import React, { lazy, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import { $api } from "./api";
 import { useDispatch } from "react-redux";
-import { LoginHeader } from "./components/login-header";
 import { useTypedSelector } from "./hooks";
 import { AuthorizedUser } from "./models/user";
-import { Loader } from "./components/loader";
 import { logout, updateTokens } from "./service/AuthService";
 import { UserActionRefreshToken } from "./store/action-creators/user/UserActionRefreshToken";
 import { UserActionLogOut } from "./store/action-creators/user/UserActionLogOut";
-
-const HomePage = lazy(() => import('./pages/home/HomePage'));
-const LoginPage = lazy(() => import('./pages/login/LoginPage'));
-const RegisterPage = lazy(() => import('./pages/register/RegisterPage'));
+import { Routing } from "./routing";
+import { Header } from "./components/header";
 
 const App = () => {
     const { user } = useTypedSelector(state => state.user);
@@ -45,14 +41,8 @@ const App = () => {
 
     return (
         <>
-            <LoginHeader/>
-            <Suspense fallback={ <Loader/> }>
-                <Routes>
-                    <Route path="/" element={ <HomePage/> }/>
-                    <Route path="/login" element={ <LoginPage/> }/>
-                    <Route path="/register" element={ <RegisterPage/> }/>
-                </Routes>
-            </Suspense>
+            <Header/>
+            <Routing/>
         </>
     );
 }

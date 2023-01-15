@@ -1,5 +1,5 @@
-import { $api, $cleanApi } from "../http";
-import { AuthResponse } from "../models/response/AuthResponse";
+import { $api, $cleanApi } from "../api";
+import { AuthResponse } from "../models/auth/AuthResponse";
 
 type RegisterData = {
     name: string,

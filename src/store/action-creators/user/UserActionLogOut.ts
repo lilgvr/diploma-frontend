@@ -1,4 +1,4 @@
-import { AuthResponse } from "../../../models/response/AuthResponse";
+import { AuthResponse } from "../../../models/auth/AuthResponse";
 import { USER_ACTIONS, UserAction } from "../../actions/UserAction";
 
 export const UserActionLogOut = (payload?: AuthResponse): UserAction => {

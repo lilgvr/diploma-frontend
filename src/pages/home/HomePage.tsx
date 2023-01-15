@@ -7,7 +7,7 @@ import styles from "./home-page.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { UserActionDelete } from "../../store/action-creators/user/UserActionDelete";
 import { AuthorizedUser } from "../../models/user";
-import { $api } from "../../http";
+import { $api } from "../../api";
 
 const HomePage: FC = () => {
     const { logged_in, user } = useTypedSelector(state => state.user);

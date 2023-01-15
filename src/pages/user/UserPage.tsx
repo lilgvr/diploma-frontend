@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useParams } from "react-router-dom";
 
-const RoomPage: FC = () => {
+const UserPage: FC = () => {
     const { id } = useParams();
 
     return (
@@ -11,4 +11,4 @@ const RoomPage: FC = () => {
     );
 };
 
-export default RoomPage;
+export default UserPage;

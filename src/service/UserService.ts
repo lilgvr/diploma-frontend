@@ -1,4 +1,4 @@
-import { $api } from "../http";
+import { $api } from "../api";
 import { User } from "../models/user";
 
 export const getUserById = (id: number) => {

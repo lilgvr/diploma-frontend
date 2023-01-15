@@ -5,7 +5,8 @@ import { UserActionLogIn } from "../../store/action-creators/user";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./login-page.module.scss";
-import { AuthResponse } from "../../models/response/AuthResponse";
+import { AuthResponse } from "../../models/auth/AuthResponse";
+import { useDocTitle } from "../../hooks";
 
 const LoginPage: FC = () => {
     const [loginData, setLoginData] = useState("");
@@ -14,9 +15,7 @@ const LoginPage: FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        document.title = 'Вход';
-    }, []);
+    useDocTitle('Вход');
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();

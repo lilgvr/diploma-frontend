@@ -1,6 +1,6 @@
 import React, { FC, FormEvent, useCallback, useEffect, useState } from 'react';
 import axios from "axios";
-import { API_URL } from "../../http";
+import { API_URL } from "../../api";
 import { register } from "../../service/AuthService";
 import styles from "./register-page.module.scss";
 import { Link, useNavigate } from "react-router-dom";
