@@ -1,4 +1,4 @@
-import React, { lazy, useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { $api } from "./api";
 import { useDispatch } from "react-redux";
@@ -8,7 +8,10 @@ import { logout, updateTokens } from "./service/AuthService";
 import { UserActionRefreshToken } from "./store/action-creators/user/UserActionRefreshToken";
 import { UserActionLogOut } from "./store/action-creators/user/UserActionLogOut";
 import { Routing } from "./routing";
-import { Header } from "./components/header";
+import { Loader } from "./components/common/loader";
+// import { Header } from "./components/header";
+
+const Header = lazy(() => import("./components/header/Header"));
 
 const App = () => {
     const { user } = useTypedSelector(state => state.user);
@@ -40,10 +43,10 @@ const App = () => {
     }, [currentUser?.id, dispatch, navigate]);
 
     return (
-        <>
+        <Suspense fallback={ <Loader/> }>
             <Header/>
             <Routing/>
-        </>
+        </Suspense>
     );
 }
 

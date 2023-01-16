@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState, Suspense } from 'react';
 import { useParams } from "react-router-dom";
 import { filterMovies, getMovieById } from "../../api/repos/movie";
 import { Movie } from "../../models/movie/Movie";
-import { Loader } from "../../components/loader";
+import { Loader } from "../../components/common/loader";
 
 const getYear = (movie: Movie) => {
     return new Date(movie.premiere_date).getFullYear();

@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import "./header.scss";
 import { HeaderAccountButton, HeaderButton } from "../header-button/HeaderButton";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ export enum HeaderVariant {
     FAVS_PAGE
 }
 
-export const Header: FC<{ variant?: HeaderVariant }> = ({ variant = HeaderVariant.DEFAULT }) => {
+const Header: FC<{ variant?: HeaderVariant }> = ({ variant = HeaderVariant.DEFAULT }) => {
     return (
         <header>
             <Link to="/">W2Gether</Link>
@@ -19,9 +19,11 @@ export const Header: FC<{ variant?: HeaderVariant }> = ({ variant = HeaderVarian
               <>
                 <HeaderButton icon="" to="/profile"/>
                 <HeaderButton icon="" to="/favorites"/>
-                <HeaderAccountButton/>
+                {/*<HeaderAccountButton/>*/}
               </>
             }
         </header>
     );
 };
+
+export default Header;
