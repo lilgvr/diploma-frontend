@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import "./header.scss";
 import { HeaderAccountButton, HeaderButton } from "../header-button/HeaderButton";
 import { Link } from "react-router-dom";
+import user from '../../assets/icons/user.svg';
+import bookmarks from '../../assets/icons/bookmarks.svg';
 
 export enum HeaderVariant {
     DEFAULT,
@@ -14,14 +16,16 @@ const Header: FC<{ variant?: HeaderVariant }> = ({ variant = HeaderVariant.DEFAU
     return (
         <header>
             <Link to="/">W2Gether</Link>
-            {
-                variant === HeaderVariant.DEFAULT &&
-              <>
-                <HeaderButton icon="" to="/profile"/>
-                <HeaderButton icon="" to="/favorites"/>
-                {/*<HeaderAccountButton/>*/}
-              </>
-            }
+            <div className="header_links">
+                {
+                    variant === HeaderVariant.DEFAULT &&
+                  <>
+                    <HeaderButton icon={ user } to="/profile"/>
+                    <HeaderButton icon={ bookmarks } to="/favorites"/>
+                      {/*<HeaderAccountButton/>*/ }
+                  </>
+                }
+            </div>
         </header>
     );
 };

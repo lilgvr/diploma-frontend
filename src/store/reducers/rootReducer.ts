@@ -6,7 +6,7 @@ import { movieReducer } from "./movieReducer";
 export const rootReducer = combineReducers({
     main: mainReducer,
     user: userReducer,
-    movie: movieReducer
+    movie: movieReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>

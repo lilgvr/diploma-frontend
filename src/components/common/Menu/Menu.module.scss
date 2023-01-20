@@ -1,0 +1,34 @@
+@import '/src/styles/main';
+
+.menu {
+    width: 20%;
+    background-color: $fore-color;
+    color: $secondary-color;
+    border-left: 2px solid $secondary-color;
+    /*position: fixed;
+    top: 80px;
+    right: 0;*/
+
+    &Tabs {
+        border-bottom: 2px solid $accent-color;
+
+        & > div {
+            display: flex;
+            justify-content: center;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        &Selected {
+            background-color: $secondary-color;
+            color: $background-color;
+            transition: all .2s linear;
+        }
+    }
+
+    &Rooms {
+
+    }
+}

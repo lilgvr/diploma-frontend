@@ -1,5 +1,5 @@
 import { USER_ACTIONS, UserAction } from "../../actions/UserAction";
-import { AuthResponse } from "../../../models/auth/AuthResponse";
+import { AuthResponse } from "../../../models";
 
 export const UserActionLogIn = (payload: AuthResponse): UserAction => {
     return {

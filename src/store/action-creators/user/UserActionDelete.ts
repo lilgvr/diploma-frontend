@@ -1,4 +1,4 @@
-import { AuthorizedUser } from "../../../models/user";
+import { AuthorizedUser } from "../../../models";
 import { USER_ACTIONS, UserAction } from "../../actions/UserAction";
 
 export const UserActionDelete = (payload: AuthorizedUser): UserAction => {

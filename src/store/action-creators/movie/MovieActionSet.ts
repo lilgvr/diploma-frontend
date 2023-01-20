@@ -1,5 +1,5 @@
-import { Movie } from "../../types";
 import { MOVIE_ACTIONS, MovieAction } from "../../actions/MovieAction";
+import { Movie } from "../../../models/movie/Movie";
 
 export const MovieActionSet = (payload: Movie[]): MovieAction => {
     return {

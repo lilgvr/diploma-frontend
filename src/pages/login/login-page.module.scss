@@ -1,4 +1,4 @@
-@import "../../styles/colors";
+@import "../../styles/main";
 
 @mixin shared-main {
     padding: 1vw 0 0 2vw;
@@ -9,7 +9,13 @@
         width: 350px;
         gap: 1.5vw;
 
-        input, button {
+        @include custom-input;
+
+        button {
+            @include custom-button;
+        }
+
+        /*input, button {
             color: $secondary-color;
             background-color: $primary-color;
             outline: none;
@@ -55,7 +61,7 @@
             -webkit-text-fill-color: $secondary-color;
             -webkit-box-shadow: 0 0 0 1000px $primary-color inset;
             transition: background-color 5000s ease-in-out 0s;
-        }
+        }*/
     }
 }
 

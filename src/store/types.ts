@@ -1,8 +1,13 @@
 import { UserAction } from "./actions/UserAction";
 import { MovieAction } from "./actions/MovieAction";
-import { AuthorizedUser } from "../models/user";
+import { AuthorizedUser, Movie, Poster } from "../models";
+import { MainTabAction } from "./actions/MainTabAction";
 
-export type MainState = {}
+export type MainState = {
+    mainSelectedTab: number,
+    userSelectedTab: number,
+    currentPage: string
+}
 
 export type UserState = {
     user: AuthorizedUser | null,
@@ -12,7 +17,9 @@ export type UserState = {
 }
 
 export type MovieState = {
-    movies: Movie[]
+    movies: Movie[],
+    series: Movie[],
+    posters: Poster[]
 }
 
 export type TokenType = {
@@ -20,7 +27,7 @@ export type TokenType = {
     value: string | null
 }
 
-export type Movie = {
+/*export type Movie = {
     id: number,
     title: string,
     premiere_date: Date,
@@ -29,7 +36,7 @@ export type Movie = {
     genre_id: number,
     country_id: number,
     poster_id?: number
-}
+}*/
 
 export type Genre = {
     id: number,
@@ -57,5 +64,5 @@ export type MovieComment = {
     datetime: string
 }
 
-export type AppAction = UserAction | MovieAction;
+export type AppAction = UserAction | MovieAction | MainTabAction;
 

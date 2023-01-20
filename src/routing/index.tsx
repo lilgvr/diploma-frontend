@@ -20,6 +20,7 @@ export const Routing: FC = () => {
                 <Route path="/profile" element={ <UserPage/> }/>
                 {/* TODO изменить методы на бэке*/}
                 <Route path="/movie/:id" element={ <MoviePage/> }/>
+                <Route path="/series/:id" element={ <MoviePage/> }/>
                 <Route path="/favorites" element={ <MoviePage/> }/>
             </Routes>
         </Suspense>

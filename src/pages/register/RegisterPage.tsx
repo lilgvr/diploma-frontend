@@ -4,6 +4,7 @@ import { API_URL } from "../../api";
 import { register } from "../../service/AuthService";
 import styles from "./register-page.module.scss";
 import { Link, useNavigate } from "react-router-dom";
+import { useDocTitle } from "../../hooks";
 
 const RegisterPage: FC = () => {
     const [email, setEmail] = useState("");
@@ -25,9 +26,7 @@ const RegisterPage: FC = () => {
         });
     }, [])
 
-    useEffect(() => {
-        document.title = 'Регистрация';
-    }, []);
+    useDocTitle('Регистрация');
 
     useEffect(() => {
         fetchCountries();
