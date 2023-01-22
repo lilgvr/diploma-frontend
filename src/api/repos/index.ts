@@ -1,2 +1,4 @@
 export * from "./movies"
-export * from "./posters"
+export * from "./countries"
+export * from "./directors"
+export * from "./genres"

@@ -1,10 +1,23 @@
-import React, { FC, FormEvent, Suspense, useCallback, useDeferredValue, useMemo, useRef, useState } from 'react';
+import React, {
+    FC,
+    FormEvent,
+    lazy,
+    Suspense,
+    useCallback,
+    useDeferredValue,
+    useEffect,
+    useMemo,
+    useRef,
+    useState
+} from 'react';
 import { useDocTitle, useTypedSelector } from "../../hooks";
 import styles from "./HomePage.module.scss";
 import { Movie } from "../../models";
 import Menu from "../../components/common/Menu/Menu";
-import MovieCard from "../../components/home/MovieCard/MovieCard";
+// import MovieCard from "../../components/home/MovieCard/MovieCard";
 import { Loader } from "../../components/common/loader";
+
+const MovieCard = lazy(() => import("../../components/home/MovieCard/MovieCard"));
 
 const HomePage: FC = () => {
     const { movies, series } = useTypedSelector(state => state.movie);
@@ -34,11 +47,13 @@ const HomePage: FC = () => {
     );
 };
 
+
+// TODO Загрузка всех картинок
 const HomeContent: FC<{ title: string, array: Movie[], type?: "movie" | "series" }> = (
     { array, title, type = "movie" }
 ) => {
-    const { posters } = useTypedSelector(state => state.movie);
-
+    const [imagePromises, setImagePromises] = useState<Promise<boolean>[]>([]);
+    const [imagesLoaded, setImagesLoaded] = useState(true);
     const [searchValue, setSearchValue] = useState('');
     const deferredSearch = useDeferredValue(searchValue);
 
@@ -46,6 +61,21 @@ const HomeContent: FC<{ title: string, array: Movie[], type?: "movie" | "series"
         const target = e.target as HTMLInputElement;
         setSearchValue(() => target.value);
     }
+
+    /*const handleImageLoad = (pr: Promise<boolean>) => {
+        setImagePromises(prevState => {
+            prevState?.push(pr);
+            return prevState;
+        });
+    }*/
+
+    useEffect(() => {
+        if (array.length === imagePromises.length) {
+            Promise.all(imagePromises)
+                .then(() => setImagesLoaded(true))
+                .catch(() => setImagesLoaded(false))
+        }
+    }, [array.length, imagePromises]);
 
     const filterArray = useCallback(
         (array: Movie[]) => array.filter(
@@ -59,8 +89,6 @@ const HomeContent: FC<{ title: string, array: Movie[], type?: "movie" | "series"
         [filterArray, array]
     )
 
-    console.log(filteredArray.length !== 0)
-
     return (
         <>
             <div className={ styles.homeMainContentSearch }>
@@ -73,30 +101,38 @@ const HomeContent: FC<{ title: string, array: Movie[], type?: "movie" | "series"
                 />
             </div>
             {
-                filteredArray.length !== 0 && array ?
-                    <div className={ styles.homeMainContentMovies }>
+                imagesLoaded ?
+                    <>
                         {
-                            searchValue ?
-                                filteredArray &&
-                                filteredArray.map(movie => <MovieCard
-                                    movieId={ movie.id }
-                                    posterId={ posters.find(poster => poster.id === movie.poster_id)?.id ?? 0 }
-                                    caption={ movie.title }
-                                    key={ movie.id }
-                                    type={ type }
-                                />)
-                                :
-                                array &&
-                                array.map(movie => <MovieCard
-                                    movieId={ movie.id }
-                                    posterId={ posters.find(poster => poster.id === movie.poster_id)?.id ?? 0 }
-                                    caption={ movie.title }
-                                    key={ movie.id }
-                                    type={ type }
-                                />)
+                            filteredArray.length !== 0 && array ?
+                                <div className={ styles.homeMainContentMovies }>
+                                    {
+                                        searchValue ?
+                                            filteredArray &&
+                                            filteredArray.map(movie => <MovieCard
+                                                movieId={ movie.id }
+                                                posterId={ movie.poster_id ?? 0 }
+                                                caption={ movie.title }
+                                                key={ movie.id }
+                                                type={ type }
+                                                // onLoad={ handleImageLoad }
+
+                                            />)
+                                            :
+                                            array &&
+                                            array.map(movie => <MovieCard
+                                                movieId={ movie.id }
+                                                posterId={ movie.poster_id ?? 0 }
+                                                caption={ movie.title }
+                                                key={ movie.id }
+                                                type={ type }
+                                                // onLoad={ handleImageLoad }
+                                            />)
+                                    }
+                                </div> :
+                                <HomeContentEmpty/>
                         }
-                    </div> :
-                    <HomeContentEmpty/>
+                    </> : <Loader/>
             }
         </>
     );

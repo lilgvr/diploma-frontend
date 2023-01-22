@@ -1,6 +1,7 @@
 import axios, { CreateAxiosDefaults } from "axios";
 
-export const API_URL = '//localhost:8000/api'
+export const API_URL = '//localhost:8000/api';
+export const IMG_URL = '//localhost:8000/static/images';
 
 const apiOptions: CreateAxiosDefaults = {
     withCredentials: true,

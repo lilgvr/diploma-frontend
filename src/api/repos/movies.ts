@@ -1,5 +1,5 @@
 import { $api } from "../index";
-import { Movie } from "../../models/movie/Movie";
+import { Movie } from "../../models";
 
 export const getAllMovies = async (): Promise<Movie[]> => {
     const res = await $api.get('/movies/all');

@@ -1,6 +1,6 @@
 import { UserAction } from "./actions/UserAction";
 import { MovieAction } from "./actions/MovieAction";
-import { AuthorizedUser, Movie, Poster } from "../models";
+import { AuthorizedUser, Country, Director, Genre, Movie } from "../models";
 import { MainTabAction } from "./actions/MainTabAction";
 
 export type MainState = {
@@ -19,7 +19,9 @@ export type UserState = {
 export type MovieState = {
     movies: Movie[],
     series: Movie[],
-    posters: Poster[]
+    countries: Country[],
+    genres: Genre[],
+    directors: Director[]
 }
 
 export type TokenType = {
@@ -37,11 +39,6 @@ export type TokenType = {
     country_id: number,
     poster_id?: number
 }*/
-
-export type Genre = {
-    id: number,
-    title: string
-}
 
 export type Room = {
     id: number,

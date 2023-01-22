@@ -5,17 +5,21 @@ import { useDispatch } from "react-redux";
 import { useTypedSelector } from "./hooks";
 import { AuthorizedUser } from "./models";
 import { logout, updateTokens } from "./service/AuthService";
-import { UserActionRefreshToken } from "./store/action-creators/user/UserActionRefreshToken";
-import { UserActionLogOut } from "./store/action-creators/user/UserActionLogOut";
-import { Routing } from "./routing";
+import {
+    CountriesActionSet,
+    DirectorsActionSet,
+    GenresActionSet,
+    MovieActionSet,
+    SeriesActionSet,
+    UserActionLogOut,
+    UserActionRefreshToken
+} from "./store/action-creators";
 import { Loader } from "./components/common/loader";
-import { MovieActionSet } from "./store/action-creators/movie";
-import { movies, posters } from "./mocks";
-import { PosterActionSet } from "./store/action-creators/movie/PosterActionSet";
-import { SeriesActionSet } from "./store/action-creators/movie/SeriesActionSet";
-import { series } from "./mocks/series";
+import { movies, series } from "./mocks";
+import { getAllCountries, getAllDirectors, getAllGenres } from "./api/repos";
 
 const Header = lazy(() => import("./components/header/Header"));
+const Routing = lazy(() => import("./routing").then(({ Routing }) => ({ default: Routing })));
 
 const App = () => {
     const { user } = useTypedSelector(state => state.user);
@@ -23,19 +27,18 @@ const App = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    /*useEffect(() => {
-        getAllMovies().then((movies) => {
-            dispatch(MovieActionSet(movies));
-        });
-        getAllPosters().then(posters => {
-
-        })
-    }, [dispatch]);*/
-
     useEffect(() => {
         dispatch(MovieActionSet(movies));
-        dispatch(PosterActionSet(posters));
         dispatch(SeriesActionSet(series));
+        getAllCountries().then(countries => {
+            dispatch(CountriesActionSet(countries));
+        })
+        getAllGenres().then(genres => {
+            dispatch(GenresActionSet(genres));
+        })
+        getAllDirectors().then(directors => {
+            dispatch(DirectorsActionSet(directors));
+        })
     }, [dispatch]);
 
     useEffect(() => {

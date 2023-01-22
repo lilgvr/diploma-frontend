@@ -1,4 +1,7 @@
 export * from "./Poster"
 export * from "./movie/Movie"
+export * from "./movie/Genre"
+export * from "./movie/Country"
+export * from "./movie/Director"
 export * from "./user"
 export * from "./auth/AuthResponse"

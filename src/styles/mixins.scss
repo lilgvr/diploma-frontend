@@ -79,3 +79,10 @@
         border-color: $accent-color;
     }
 }
+
+@mixin poster($width, $height) {
+    border: 2px solid $secondary-color;
+    width: $width;
+    height: $height;
+    transition: opacity .2s linear;
+}

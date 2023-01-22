@@ -7,5 +7,7 @@ export type Movie = {
     country_id: number,
     poster_id: number | null,
     kinopoisk: number,
-    imdb: number
+    imdb: number,
+    director_id: number,
+    duration: number
 }

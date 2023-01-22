@@ -1,12 +1,19 @@
-import React, { FC, Suspense, useEffect, useState } from 'react';
+import React, { FC, lazy, Suspense, useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { Movie } from "../../models";
 import { Loader } from "../../components/common/loader";
 import { useDocTitle, useTypedSelector } from "../../hooks";
+import styles from "./MoviePage.module.scss";
 
-const getYear = (movie: Movie) => {
-    return new Date(movie.premiere_date).getFullYear();
-}
+const MovieInfoBlock = lazy(
+    () => import("../../components/movie/MovieInfoBlock/MovieInfoBlock")
+);
+const MovieDescriptionBlock = lazy(
+    () => import("../../components/movie/MovieDescriptionBlock/MovieDescriptionBlock")
+);
+const MovieRoomsBlock = lazy(
+    () => import("../../components/movie/MovieRoomsBlock/MovieRoomsBlock")
+);
 
 type MovieType = "movie" | "series";
 
@@ -32,29 +39,21 @@ const MoviePage: FC = () => {
         }
     }, [id, movieType, movies, series]);
 
-    /* TODO
-    * Get movie from store
-    *
-    * Now: getting movie from server
-    *
-    * */
-
-    /*useEffect(() => {
-        id && getMovieById(+id).then(movie => setCurrentMovie(movie));
-    }, [id]);*/
-
     return (
-        <div>
+        <main className={ styles.moviePageCtr }>
             <Suspense fallback={ <Loader/> }>
                 {
                     currentMovie &&
                   <>
-                    <p>{ currentMovie.title }</p>
-                    <p>{ getYear(currentMovie) }</p>
+                    <div className={ styles.movieDataCtr }>
+                      <MovieInfoBlock movie={ currentMovie }/>
+                      <MovieDescriptionBlock description={ currentMovie.description }/>
+                    </div>
+                    <MovieRoomsBlock movieId={ currentMovie.id }/>
                   </>
                 }
             </Suspense>
-        </div>
+        </main>
     );
 };
 
