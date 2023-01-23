@@ -1,6 +1,6 @@
 import { TokenType, UserState } from "../types";
 import { USER_ACTIONS, UserAction } from "../actions/UserAction";
-import { AuthResponse } from "../../models/auth/AuthResponse";
+import { AuthResponse } from "../../models";
 
 const initialUserState: UserState = {
     user: null,

@@ -7,15 +7,14 @@ import React, {
     useDeferredValue,
     useEffect,
     useMemo,
-    useRef,
     useState
 } from 'react';
 import { useDocTitle, useTypedSelector } from "../../hooks";
 import styles from "./HomePage.module.scss";
-import { Movie } from "../../models";
+import { AuthorizedUser, Movie } from "../../models";
 import Menu from "../../components/common/Menu/Menu";
-// import MovieCard from "../../components/home/MovieCard/MovieCard";
 import { Loader } from "../../components/common/loader";
+import { useDispatch } from "react-redux";
 
 const MovieCard = lazy(() => import("../../components/home/MovieCard/MovieCard"));
 
@@ -23,17 +22,19 @@ const HomePage: FC = () => {
     const { movies, series } = useTypedSelector(state => state.movie);
     const { mainSelectedTab } = useTypedSelector(state => state.main);
 
-    /*const { logged_in, user } = useTypedSelector(state => state.user);
+    const { logged_in, user } = useTypedSelector(state => state.user);
     const currentUser = user as AuthorizedUser;
-    const dispatch = useDispatch();*/
-
-    const contentRef = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
 
     useDocTitle('Главная');
 
+    useEffect(() => {
+        console.log(user)
+    }, [user]);
+
     return (
         <main className={ styles.homeMain }>
-            <div className={ styles.homeMainContent } ref={ contentRef }>
+            <div className={ styles.homeMainContent }>
                 <Suspense fallback={ <Loader/> }>
                     {
                         mainSelectedTab === 0 ?

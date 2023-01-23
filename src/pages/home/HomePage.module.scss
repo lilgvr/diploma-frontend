@@ -6,7 +6,7 @@
     width: 100%;
     height: $main-height;
 
-    p:hover {
+    & > p:hover {
         cursor: pointer;
     }
 

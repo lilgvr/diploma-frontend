@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from 'react';
+import React, { lazy, Suspense, useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { $api } from "./api";
 import { useDispatch } from "react-redux";
@@ -27,7 +27,7 @@ const App = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useEffect(() => {
+    /*useEffect(() => {
         dispatch(MovieActionSet(movies));
         dispatch(SeriesActionSet(series));
         getAllCountries().then(countries => {
@@ -39,7 +39,21 @@ const App = () => {
         getAllDirectors().then(directors => {
             dispatch(DirectorsActionSet(directors));
         })
-    }, [dispatch]);
+    }, [dispatch]);*/
+
+    useLayoutEffect(() => {
+        dispatch(MovieActionSet(movies));
+        dispatch(SeriesActionSet(series));
+        getAllCountries().then(countries => {
+            dispatch(CountriesActionSet(countries));
+        })
+        getAllGenres().then(genres => {
+            dispatch(GenresActionSet(genres));
+        })
+        getAllDirectors().then(directors => {
+            dispatch(DirectorsActionSet(directors));
+        })
+    }, [dispatch])
 
     useEffect(() => {
         $api.interceptors.request.use(async config => { // FIXME

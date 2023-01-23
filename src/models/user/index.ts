@@ -1,10 +1,13 @@
+import { Room } from "../room";
+
 export type User = {
     id: number,
     name: string,
     birth_date: Date,
     country_id: number,
     sex: number,
-    activated: boolean
+    activated: boolean,
+    avatar_id: number
 }
 
 export type UserCredentials = {
@@ -17,4 +20,4 @@ export type UserCredentials = {
     activation_link: string | null,
 }
 
-export type AuthorizedUser = Omit<User, "activated"> & Pick<UserCredentials, "email" | "username">
+export type AuthorizedUser = Omit<User, "activated"> & Pick<UserCredentials, "email" | "username"> & { rooms: Room[] }

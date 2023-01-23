@@ -29,6 +29,46 @@
     }
 
     &Rooms {
+        display: flex;
+        flex-direction: column;
 
+        & > p {
+            width: 100%;
+            text-align: center;
+        }
+
+        &Controls {
+            width: 100%;
+            border-bottom: 2px solid $accent-color;
+
+            p {
+                text-align: center;
+                font-weight: 500;
+                font-size: 1.25vw;
+                color: $font-color;
+            }
+        }
+
+        &Tab {
+            width: 100%;
+
+            p {
+                text-align: center;
+            }
+
+            &:hover {
+                background-color: $secondary-color;
+                color: $background-color;
+                transition: all .2s linear;
+            }
+
+            &:not(:first-of-type) {
+                border-top: 2px solid $header-color;
+            }
+
+            &:last-of-type {
+                border-bottom: 2px solid $secondary-color;
+            }
+        }
     }
 }

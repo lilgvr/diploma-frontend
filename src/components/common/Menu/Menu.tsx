@@ -4,9 +4,11 @@ import { MenuTab } from "./MenuTab";
 import { useDispatch } from "react-redux";
 import { MainTabActionSet } from "../../../store/action-creators/tab/MainTabActionSet";
 import { useTypedSelector } from "../../../hooks";
+import { MenuRoomTab } from "./MenuRoomTab";
 
 const Menu: FC<{ ref?: React.RefObject<HTMLElement> }> = ({ ref }) => {
     const { mainSelectedTab } = useTypedSelector(state => state.main);
+    const { user, logged_in } = useTypedSelector(state => state.user);
     const [currentTab, setCurrentTab] = useState(mainSelectedTab);
     const dispatch = useDispatch();
 
@@ -34,7 +36,14 @@ const Menu: FC<{ ref?: React.RefObject<HTMLElement> }> = ({ ref }) => {
                 <MenuTab title="Сериалы" selected={ currentTab === 1 } onClick={ handleSeriesTabClick }/>
             </div>
             <div className={ styles.menuRooms }>
-
+                <div className={ styles.menuRoomsControls }>
+                    <p>Комнаты</p>
+                </div>
+                {
+                    user && logged_in ?
+                        user.rooms.map(room => <MenuRoomTab room={ room } key={ room.id }/>) :
+                        <p>Войдите, чтобы увидеть список доступных комнат</p>
+                }
             </div>
         </div>
     );
